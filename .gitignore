@@ -2,5 +2,4 @@
 __pycache__
 my-notes
 .ipynb_checkpoints/*
-*.ipynb
 data
