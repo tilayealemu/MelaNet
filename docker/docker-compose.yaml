@@ -1,0 +1,11 @@
+version: '2'
+services:
+  notebook:
+    container_name: notebook
+    image: "ainsight/notebook"
+    tty: true
+    volumes:
+     - ..:/notebooks
+    ports:
+     - "8888:8888"
+     - "6606:6606"
