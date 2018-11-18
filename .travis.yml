@@ -1,3 +1,3 @@
 script:
-  # Build server
+  # Push melanet image
   - cd docker && ./push.sh

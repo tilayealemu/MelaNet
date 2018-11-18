@@ -1,8 +1,8 @@
 version: '2'
 services:
-  notebook:
-    container_name: notebook
-    image: "ainsight/notebook"
+  melanet:
+    container_name: melanet
+    image: tilayealemu/melanet
     tty: true
     volumes:
      - ..:/notebooks
