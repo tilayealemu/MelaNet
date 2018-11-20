@@ -2,6 +2,7 @@ from keras import backend as K
 from keras.models import Model
 from keras.layers import (BatchNormalization, Conv1D, Dense, Input, 
     TimeDistributed, Activation, Bidirectional, SimpleRNN, GRU, LSTM)
+from keras.utils import plot_model
 
 
 def cnn_output_length(input_length, filter_size, border_mode, stride,
@@ -45,6 +46,7 @@ def model_1(input_dim, units, activation, output_dim=29):
     model = Model(inputs=input_data, outputs=y_pred)
     model.output_length = lambda x: x
     print(model.summary())
+    plot_model(model, to_file='models/model_1.png')
     return model
 
 
@@ -93,4 +95,5 @@ def model_2(input_dim, filters, kernel_size, conv_stride,
     model.output_length = lambda x: cnn_output_length(
         x, kernel_size, conv_border_mode, conv_stride)
     print(model.summary())
+    plot_model(model, to_file='models/model_2.png', show_shapes=True)
     return model
