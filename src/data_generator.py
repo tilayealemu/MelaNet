@@ -343,3 +343,9 @@ def plot_spectrogram_feature(vis_spectrogram_feature):
     plt.colorbar(im, cax=cax)
     plt.show()
 
+
+data_gen = AudioGenerator(spectrogram=False)
+data_gen.load_train_data()
+data_gen.load_validation_data()
+TRAIN_LENGTH = len(data_gen.train_texts)
+VALID_LENGTH = len(data_gen.valid_texts)

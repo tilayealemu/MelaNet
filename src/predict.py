@@ -1,4 +1,4 @@
-from src.data_generator import AudioGenerator
+from src.data_generator import data_gen
 from src.models import *
 from src.data_generator import vis_train_features, plot_raw_audio
 from src.utils import int_sequence_to_text
@@ -8,13 +8,6 @@ from keras import backend as K
 from IPython.display import Audio
 from IPython.display import Markdown, display
 from IPython.display import Audio
-
-data_gen = AudioGenerator(spectrogram=False)
-data_gen.load_train_data()
-data_gen.load_validation_data()
-
-TRAIN_LENGTH = len(data_gen.train_texts)
-VALID_LENGTH = len(data_gen.valid_texts)
 
 def predict(index, partition, model, verbose=True):
     """ Print a model's decoded predictions
