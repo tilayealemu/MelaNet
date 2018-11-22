@@ -43,4 +43,6 @@ def predict(index, partition, model, verbose=True):
         print('Predicted transcription:\n' + '\n' + predicted)
         print('-'*80)
         display(Audio(audio_path, embed=True))
-    return wer(transcr, predicted)
+    wer_val = wer(transcr, predicted)
+    print("wer: %d" % wer_val)
+    return wer_val
