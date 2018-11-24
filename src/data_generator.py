@@ -305,13 +305,12 @@ def vis_train_features(index=0):
     return vis_text, vis_raw_audio, vis_mfcc_feature, vis_spectrogram_feature, vis_audio_path
 
 
-def plot_raw_audio(vis_raw_audio):
-    # plot the raw audio signal
-    fig = plt.figure(figsize=(12,3))
+def plot_raw_audio(vis_raw_audio, title='Audio Signal', size=(12, 3)):
+    fig = plt.figure(figsize=size)
     ax = fig.add_subplot(111)
     steps = len(vis_raw_audio)
     ax.plot(np.linspace(1, steps, steps), vis_raw_audio)
-    plt.title('Audio Signal')
+    plt.title(title)
     plt.xlabel('Time')
     plt.ylabel('Amplitude')
     plt.show()
@@ -342,7 +341,6 @@ def plot_spectrogram_feature(vis_spectrogram_feature):
     cax = divider.append_axes("right", size="5%", pad=0.05)
     plt.colorbar(im, cax=cax)
     plt.show()
-
 
 data_gen = AudioGenerator(spectrogram=False)
 data_gen.load_train_data()
