@@ -7,7 +7,6 @@ import numpy as np
 from keras import backend as K
 from IPython.display import Audio
 from IPython.display import Markdown, display
-from IPython.display import Audio
 
 def predict(index, partition, model, verbose=True):
     """ Print a model's decoded predictions
