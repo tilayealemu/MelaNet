@@ -35,7 +35,7 @@ def predict(index, partition, model, verbose=True):
     output_length = [model.output_length(data_point.shape[0])]
     pred_ints = (K.eval(K.ctc_decode(
                 prediction, output_length, greedy=False)[0][0])+1).flatten().tolist()
-    predicted = ''.join(int_sequence_to_text(pred_ints))
+    predicted = ''.join(int_sequence_to_text(pred_ints)).replace("<SPACE>", " ")
     if verbose:
         # play the audio file, and display the true and predicted transcriptions
         print('True transcription:\n' + '\n' + transcr)
