@@ -42,4 +42,3 @@ def predict(index, partition, model, verbose=True):
         print('Predicted: ' + predicted)
     wer_val = wer(transcr, predicted)
     print("wer: %d" % wer_val)
-    return wer_val
