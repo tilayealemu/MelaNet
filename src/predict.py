@@ -36,9 +36,10 @@ def predict(index, partition, model, verbose=True):
     pred_ints = (K.eval(K.ctc_decode(
                 prediction, output_length, greedy=False)[0][0])+1).flatten().tolist()
     predicted = ''.join(int_sequence_to_text(pred_ints)).replace("<SPACE>", " ")
+    wer_val = wer(transcr, predicted)
     if verbose:
         display(Audio(audio_path, embed=True))
         print('Truth: ' + transcr)
         print('Predicted: ' + predicted)
-    wer_val = wer(transcr, predicted)
-    print("wer: %d" % wer_val)
+        print("wer: %d" % wer_val)
+    return wer_val
