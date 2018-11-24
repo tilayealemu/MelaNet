@@ -37,12 +37,9 @@ def predict(index, partition, model, verbose=True):
                 prediction, output_length, greedy=False)[0][0])+1).flatten().tolist()
     predicted = ''.join(int_sequence_to_text(pred_ints)).replace("<SPACE>", " ")
     if verbose:
-        # play the audio file, and display the true and predicted transcriptions
-        print('True transcription:\n' + '\n' + transcr)
-        print('-'*80)
-        print('Predicted transcription:\n' + '\n' + predicted)
-        print('-'*80)
         display(Audio(audio_path, embed=True))
+        print('Truth: ' + transcr)
+        print('Predicted: ' + predicted)
     wer_val = wer(transcr, predicted)
     print("wer: %d" % wer_val)
     return wer_val
