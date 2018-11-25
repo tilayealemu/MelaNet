@@ -11,4 +11,5 @@ def plot_hist(p):
     plt.plot(hist['val_loss'], label="valid")
     plt.xlabel("epoch")
     plt.ylabel("loss")
+    plt.legend()
     plt.show
