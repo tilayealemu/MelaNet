@@ -3,7 +3,7 @@
 Deep learning speech recognition model for Amharic, and potentially other Ethiopian languages too.
 
 ## Overview
-The best documentation so far is [Deep Learning for Amharic speech recognition](http://ainsightful.com/index.php/2018/11/27/deep-learning-for-amharic-speech-recognition/). Here is an overview diagram of what this code base does.
+The best documentation so far is [Deep Learning for Amharic speech recognition](http://ainsightful.com/index.php/2018/11/27/deep-learning-for-amharic-speech-recognition/). Here is an overview.
 ![MelaNet Overview](http://ainsightful.com/wp-content/uploads/2018/11/speech-recognition-full-picture-1.png)
 
 ## Quick start
@@ -18,10 +18,9 @@ docker-compose up
 This should start Jupyter server on port 8888. Go to http://localhost:8888 to connect to it. I strongly recommend you use the docker approach as you can waste quite a lot of time installing packages on your own computer.
 
 ## Getting data
-You need data if you want to train your own models. The data is 1.2 GB when compressed, and 2.3 GB uncompressed. Download the compressed data from MelaNetData repo and copy it to your clone of this repo:
+You need data if you want to train your own models. It's 1.2 GB when compressed, and 2.3 GB uncompressed. Download it from [MelaNetData](https://github.com/tilayealemu/MelaNetData) and copy it to your clone of this repo like so:
 ```
 git clone git@github.com:tilayealemu/MelaNetData
-cd MelaNetData/docker
 cd MelaNetData/data
 cat data.tar.gz.* > data.tar.gz
 tar xzf data.tar.gz
@@ -38,4 +37,4 @@ You should now have all .wav files and transcriptions.
 ```
 
 ## Questions
-Please raise a [ticket](https://github.com/tilayealemu/MelaNetData/issues/new).
+If you face any issues please raise a [ticket](https://github.com/tilayealemu/MelaNetData/issues/new).
