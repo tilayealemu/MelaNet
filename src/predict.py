@@ -61,7 +61,7 @@ def calculate_wer(model, model_name, partition, length):
             print("processed %d in %d minutes" % (i, ((time.time() - start)/60)))
         return wer
     wer = list(map(lambda i: wer_single(i), range(0, length)))
-    print("Total time: %f" % ((time.time() - start)/60))
+    print("Total time: %f minutes" % ((time.time() - start)/60))
     with open('models/' + model_name + '_wer.pickle', 'wb') as handle:
         pickle.dump(wer, handle)
     return wer
