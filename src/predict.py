@@ -7,6 +7,9 @@ import numpy as np
 from keras import backend as K
 from IPython.display import Audio
 from IPython.display import Markdown, display
+import time
+import pickle
+
 
 def predict(index, partition, model, verbose=True):
     """ Print a model's decoded predictions
@@ -49,3 +52,20 @@ def predict_raw(index, partition, model):
         
     prediction = model.predict(np.expand_dims(data_point, axis=0))
     return (audio_path,data_point,transcr,prediction)
+
+def calculate_wer(model, model_name, partition, length):
+    start = time.time()
+    def wer_single(i):
+        wer = predict(i, partition, model, verbose=False)
+        if (i%10==0) and i>0:
+            print("processed %d in %d minutes" % (i, ((time.time() - start)/60)))
+        return wer
+    wer = list(map(lambda i: wer_single(i), range(0, length)))
+    print("Total time: %f" % ((time.time() - start)/60))
+    with open('models/' + model_name + '_wer.pickle', 'wb') as handle:
+        pickle.dump(wer, handle)
+    return wer
+
+
+def load_wer(model_name):
+    return pickle.load(open("models/" + model_name + "_wer.pickle", "rb"))
