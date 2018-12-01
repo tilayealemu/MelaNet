@@ -62,10 +62,12 @@ def calculate_wer(model, model_name, partition, length):
         return wer
     wer = list(map(lambda i: wer_single(i), range(0, length)))
     print("Total time: %f minutes" % ((time.time() - start)/60))
-    with open('models/' + model_name + '_wer.pickle', 'wb') as handle:
+    filename = 'models/' + model_name + '_' + partition + '_wer.pickle'
+    with open(filename, 'wb') as handle:
         pickle.dump(wer, handle)
     return wer
 
 
-def load_wer(model_name):
-    return pickle.load(open("models/" + model_name + "_wer.pickle", "rb"))
+def load_wer(model_name, partition):
+    filename = 'models/' + model_name + '_' + partition + '_wer.pickle'
+    return pickle.load(open(filename, "rb"))
