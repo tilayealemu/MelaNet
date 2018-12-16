@@ -32,7 +32,7 @@ WORKDIR /notebooks
 EXPOSE 8888
 
 # Start https://github.com/udacity/AIND-VUI-Capstone
-RUN pip install keras librosa python-speech-features soundfile==0.9.0.post1 matplotlib pydot
+RUN pip install keras librosa python-speech-features soundfile==0.9.0.post1 matplotlib pydot pydub
 # RUN wget --quiet https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O /install-miniconda.sh && /bin/bash /install-miniconda.sh -b -p /opt/miniconda
 RUN apt-get install wget libsndfile1 libav-tools vim graphviz -y
 # End https://github.com/udacity/AIND-VUI-Capstone
