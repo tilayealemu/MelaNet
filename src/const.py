@@ -1,3 +1,2 @@
-TRAIN_TRANS = "data/train_trans.csv"
-TRAIN_CORPUS = "data/train_corpus.json"
-VALID_CORPUS = "data/valid_corpus.json"
+TRAIN_CORPUS = "data_st/train_corpus.json"
+VALID_CORPUS = "data_st/valid_corpus.json"

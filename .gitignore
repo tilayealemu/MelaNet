@@ -2,8 +2,4 @@
 __pycache__
 my-notes
 .ipynb_checkpoints/*
-data/wav
-data/train_corpus.json
-data/train_trans.csv
-data/valid_corpus.json
-data/valid_trans.csv
+data_st
