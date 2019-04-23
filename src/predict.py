@@ -1,4 +1,3 @@
-from src.data_generator import data_gen
 from src.models import *
 from src.data_generator import vis_train_features, plot_raw_audio
 from src.utils import int_sequence_to_text
@@ -11,14 +10,15 @@ import time
 import pickle
 
 
-def predict(index, partition, model, verbose=True):
+def predict(data_gen, index, partition, model, verbose=True):
     """ Print a model's decoded predictions
     Params:
-        index (int): The example you would like to visualize
-        partition (str): One of 'train' or 'validation'
+        data_gen: Data to run prediction on
+        index (int): Example to visualize
+        partition (str): Either 'train' or 'validation'
         model (Model): The acoustic model
     """
-    audio_path,data_point,transcr,prediction = predict_raw(index, partition, model)
+    audio_path,data_point,transcr,prediction = predict_raw(data_gen, index, partition, model)
     output_length = [model.output_length(data_point.shape[0])]
     pred_ints = (K.eval(K.ctc_decode(
                 prediction, output_length, greedy=False)[0][0])+1).flatten().tolist()
@@ -31,11 +31,12 @@ def predict(index, partition, model, verbose=True):
         print("wer: %d" % wer_val)
     return wer_val
 
-def predict_raw(index, partition, model):
+def predict_raw(data_gen, index, partition, model):
     """ Get a model's decoded predictions
     Params:
-        index (int): The example you would like to visualize
-        partition (str): One of 'train' or 'validation'
+        data_gen: Data to run prediction on
+        index (int): Example to visualize
+        partition (str): Either 'train' or 'validation'
         model (Model): The acoustic model
     """
 
@@ -53,10 +54,10 @@ def predict_raw(index, partition, model):
     prediction = model.predict(np.expand_dims(data_point, axis=0))
     return (audio_path,data_point,transcr,prediction)
 
-def calculate_wer(model, model_name, partition, length):
+def calculate_wer(model, model_name, data_gen, partition, length):
     start = time.time()
     def wer_single(i):
-        wer = predict(i, partition, model, verbose=False)
+        wer = predict(data_gen, i, partition, model, verbose=False)
         print("wer: %d" % wer)
         if (i%10==0) and i>0:
             print("processed %d in %d minutes" % (i, ((time.time() - start)/60)))

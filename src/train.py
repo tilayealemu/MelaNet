@@ -2,9 +2,9 @@
 Defines a functions for training a NN.
 """
 
-from src.const import TRAIN_CORPUS
-from src.const import VALID_CORPUS
 from src.data_generator import AudioGenerator
+from src.data_generator import make_audio_gen
+
 import _pickle as pickle
 
 from keras import backend as K
@@ -31,26 +31,13 @@ def add_ctc_loss(input_to_softmax):
         outputs=loss_out)
     return model
 
-def train(input_to_softmax, 
+def train(audio_gen,
+          input_to_softmax, 
           model_name,
-          train_json=TRAIN_CORPUS,
-          valid_json=VALID_CORPUS,
           minibatch_size=20,
-          spectrogram=True,
-          mfcc_dim=13,
           optimizer=SGD(lr=0.02, decay=1e-6, momentum=0.9, nesterov=True, clipnorm=5),
           epochs=20,
-          verbose=1,
-          sort_by_duration=False,
-          max_duration=10.0):
-    
-    # create a class instance for obtaining batches of data
-    audio_gen = AudioGenerator(minibatch_size=minibatch_size, 
-        spectrogram=spectrogram, mfcc_dim=mfcc_dim, max_duration=max_duration,
-        sort_by_duration=sort_by_duration)
-    # add the training data to the generator
-    audio_gen.load_train_data(train_json)
-    audio_gen.load_validation_data(valid_json)
+          verbose=1):    
     # calculate steps_per_epoch
     num_train_examples=len(audio_gen.train_audio_paths)
     steps_per_epoch = num_train_examples//minibatch_size
@@ -65,8 +52,8 @@ def train(input_to_softmax,
     model.compile(loss={'ctc': lambda y_true, y_pred: y_pred}, optimizer=optimizer)
 
     # make results/ directory, if necessary
-    if not os.path.exists('results'):
-        os.makedirs('results')
+    if not os.path.exists('models'):
+        os.makedirs('models')
 
     # add checkpointer
     checkpointer = ModelCheckpoint(filepath='models/'+model_name+'.h5', verbose=0)
@@ -77,5 +64,5 @@ def train(input_to_softmax,
         callbacks=[checkpointer], verbose=verbose)
 
     # save model loss
-    with open('results/'+model_name+'.pickle', 'wb') as f:
+    with open('models/'+model_name+'.pickle', 'wb') as f:
         pickle.dump(hist.history, f)
