@@ -204,7 +204,7 @@ class AudioGenerator():
             partition (str): One of 'train', 'validation' or 'test'
         """
         audio_paths, durations, texts = [], [], []
-        with open(desc_file) as json_line_file:
+        with open(desc_file, encoding='utf-8') as json_line_file:
             for line_num, json_line in enumerate(json_line_file):
                 try:
                     spec = json.loads(json_line)
