@@ -58,11 +58,10 @@ def calculate_wer(model, model_name, data_gen, partition, length):
     start = time.time()
     def wer_single(i):
         wer = predict(data_gen, i, partition, model, verbose=False)
-        print("wer: %d" % wer)
-        if (i%10==0) and i>0:
+        if (i%100==0) and i>0:
             print("processed %d in %d minutes" % (i, ((time.time() - start)/60)))
         return wer
-    wer = list(map(lambda i: wer_single(i), range(5558, length)))
+    wer = list(map(lambda i: wer_single(i), range(1, length)))
     print("Total time: %f minutes" % ((time.time() - start)/60))
     filename = 'models/' + model_name + '_' + partition + '_wer.pickle'
     with open(filename, 'wb') as handle:

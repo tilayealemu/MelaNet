@@ -267,6 +267,13 @@ class AudioGenerator():
         """
         return (feature - self.feats_mean) / (self.feats_std + eps)
 
+    def train_length(self):
+        return len(self.train_texts)
+    
+    def valid_length(self):
+        return len(self.valid_texts)
+
+
 def shuffle_data(audio_paths, durations, texts):
     """ Shuffle the data (called after making a complete pass through 
         training or validation data during the training process)
