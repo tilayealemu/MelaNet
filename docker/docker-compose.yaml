@@ -3,7 +3,7 @@ services:
   melanet:
     container_name: melanet
     image: tilayealemu/melanet
-    tty: true
+    tty: false
     volumes:
      - ..:/notebooks
     ports:
