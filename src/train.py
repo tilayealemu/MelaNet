@@ -61,7 +61,7 @@ def train(audio_gen,
     # train the model
     hist = model.fit_generator(generator=audio_gen.next_train(), steps_per_epoch=steps_per_epoch,
         epochs=epochs, validation_data=audio_gen.next_valid(), validation_steps=validation_steps,
-        callbacks=[checkpointer], verbose=verbose)
+        callbacks=[checkpointer], verbose=verbose, use_multiprocessing=True)
 
     # save model loss
     with open('models/'+model_name+'.pickle', 'wb') as f:
